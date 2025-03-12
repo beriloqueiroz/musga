@@ -10,7 +10,7 @@ class NativeMusicService implements BaseMusicService {
     log.i('Iniciando serviço gRPC nativo...');
     try {
       final channel = ClientChannel(
-        '192.168.18.244',  // Seu IP local
+        '192.168.5.150',  // Seu IP local
         port: 50051,
         options: const ChannelOptions(
           credentials: ChannelCredentials.insecure(),

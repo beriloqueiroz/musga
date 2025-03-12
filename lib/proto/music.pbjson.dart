@@ -33,13 +33,14 @@ const AudioChunk$json = {
   '2': [
     {'1': 'data', '3': 1, '4': 1, '5': 12, '10': 'data'},
     {'1': 'sequence_number', '3': 2, '4': 1, '5': 5, '10': 'sequenceNumber'},
+    {'1': 'type', '3': 3, '4': 1, '5': 9, '10': 'type'},
   ],
 };
 
 /// Descriptor for `AudioChunk`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List audioChunkDescriptor = $convert.base64Decode(
     'CgpBdWRpb0NodW5rEhIKBGRhdGEYASABKAxSBGRhdGESJwoPc2VxdWVuY2VfbnVtYmVyGAIgAS'
-    'gFUg5zZXF1ZW5jZU51bWJlcg==');
+    'gFUg5zZXF1ZW5jZU51bWJlchISCgR0eXBlGAMgASgJUgR0eXBl');
 
 @$core.Deprecated('Use searchRequestDescriptor instead')
 const SearchRequest$json = {
@@ -112,13 +113,14 @@ const MusicMetadata$json = {
     {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
     {'1': 'artist', '3': 2, '4': 1, '5': 9, '10': 'artist'},
     {'1': 'album', '3': 3, '4': 1, '5': 9, '10': 'album'},
+    {'1': 'type', '3': 4, '4': 1, '5': 9, '10': 'type'},
   ],
 };
 
 /// Descriptor for `MusicMetadata`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List musicMetadataDescriptor = $convert.base64Decode(
     'Cg1NdXNpY01ldGFkYXRhEhQKBXRpdGxlGAEgASgJUgV0aXRsZRIWCgZhcnRpc3QYAiABKAlSBm'
-    'FydGlzdBIUCgVhbGJ1bRgDIAEoCVIFYWxidW0=');
+    'FydGlzdBIUCgVhbGJ1bRgDIAEoCVIFYWxidW0SEgoEdHlwZRgEIAEoCVIEdHlwZQ==');
 
 @$core.Deprecated('Use uploadResponseDescriptor instead')
 const UploadResponse$json = {

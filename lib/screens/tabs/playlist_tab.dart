@@ -16,7 +16,6 @@ class PlaylistsTab extends ConsumerStatefulWidget {
 class _PlaylistsTabState extends ConsumerState<PlaylistsTab> {
   List<Playlist> _playlists = [];
   bool _isLoading = true;
-  final _scrollController = ScrollController();
   PlaylistService? _playlistService;
   Playlist? _selectedPlaylist;
 

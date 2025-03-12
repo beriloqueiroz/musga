@@ -81,6 +81,7 @@ class AudioChunk extends $pb.GeneratedMessage {
   factory AudioChunk({
     $core.List<$core.int>? data,
     $core.int? sequenceNumber,
+    $core.String? type,
   }) {
     final $result = create();
     if (data != null) {
@@ -88,6 +89,9 @@ class AudioChunk extends $pb.GeneratedMessage {
     }
     if (sequenceNumber != null) {
       $result.sequenceNumber = sequenceNumber;
+    }
+    if (type != null) {
+      $result.type = type;
     }
     return $result;
   }
@@ -98,6 +102,7 @@ class AudioChunk extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AudioChunk', package: const $pb.PackageName(_omitMessageNames ? '' : 'music'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'data', $pb.PbFieldType.OY)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'sequenceNumber', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'type')
     ..hasRequiredFields = false
   ;
 
@@ -139,6 +144,15 @@ class AudioChunk extends $pb.GeneratedMessage {
   $core.bool hasSequenceNumber() => $_has(1);
   @$pb.TagNumber(2)
   void clearSequenceNumber() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get type => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set type($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearType() => clearField(3);
 }
 
 class SearchRequest extends $pb.GeneratedMessage {
@@ -469,6 +483,7 @@ class MusicMetadata extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? artist,
     $core.String? album,
+    $core.String? type,
   }) {
     final $result = create();
     if (title != null) {
@@ -480,6 +495,9 @@ class MusicMetadata extends $pb.GeneratedMessage {
     if (album != null) {
       $result.album = album;
     }
+    if (type != null) {
+      $result.type = type;
+    }
     return $result;
   }
   MusicMetadata._() : super();
@@ -490,6 +508,7 @@ class MusicMetadata extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'artist')
     ..aOS(3, _omitFieldNames ? '' : 'album')
+    ..aOS(4, _omitFieldNames ? '' : 'type')
     ..hasRequiredFields = false
   ;
 
@@ -540,6 +559,15 @@ class MusicMetadata extends $pb.GeneratedMessage {
   $core.bool hasAlbum() => $_has(2);
   @$pb.TagNumber(3)
   void clearAlbum() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get type => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set type($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasType() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearType() => clearField(4);
 }
 
 class UploadResponse extends $pb.GeneratedMessage {
