@@ -18,6 +18,7 @@ class _PlaylistsTabState extends ConsumerState<PlaylistsTab> {
   bool _isLoading = true;
   final _scrollController = ScrollController();
   PlaylistService? _playlistService;
+  Playlist? _selectedPlaylist;
 
   Future<void> _initPlaylistService() async {
     final prefs = await SharedPreferences.getInstance();
@@ -103,6 +104,18 @@ class _PlaylistsTabState extends ConsumerState<PlaylistsTab> {
     );
   }
 
+  void _showPlaylistDetails(Playlist playlist) {
+    setState(() {
+      _selectedPlaylist = playlist;
+    });
+  }
+
+  void _goBackToPlaylists() {
+    setState(() {
+      _selectedPlaylist = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -116,29 +129,54 @@ class _PlaylistsTabState extends ConsumerState<PlaylistsTab> {
               ? const Center(child: CircularProgressIndicator())
               : _playlists.isEmpty
                   ? const Center(child: Text('Nenhuma playlist encontrada'))
-                  : ListView.builder(
-                      controller: _scrollController,
-                      itemCount: _playlists.length,
-                      itemBuilder: (context, index) {
-                        final playlist = _playlists[index];
-                        return ListTile(
-                          title: Text(playlist.name),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              _deletePlaylist(playlist.id);
-                            },
+                  : Column(
+                      children: [
+                        if (_selectedPlaylist == null)
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _playlists.length,
+                              itemBuilder: (context, index) {
+                                final playlist = _playlists[index];
+                                return ListTile(
+                                  title: Text(playlist.name),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      _deletePlaylist(playlist.id);
+                                    },
+                                  ),
+                                  onTap: () => _showPlaylistDetails(playlist),
+                                );
+                              },
+                            ),
                           ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PlaylistDetailScreen(playlistId: playlist.id),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                        if (_selectedPlaylist != null)
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.arrow_back),
+                                      onPressed: _goBackToPlaylists,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        _selectedPlaylist!.name,
+                                        style: TextStyle(fontSize: 24),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: PlaylistDetailScreen(playlistId: _selectedPlaylist!.id),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
         ),
       ],

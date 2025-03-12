@@ -60,43 +60,38 @@ class _PlaylistDetailScreenState extends ConsumerState<PlaylistDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_playlist?.name ?? 'Detalhes da Playlist'),
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _playlist == null
-              ? const Center(child: Text('Playlist não encontrada'))
-              : Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () => _playPlaylist(false),
-                          child: const Text('Tocar em Ordem'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => _playPlaylist(true),
-                          child: const Text('Tocar Aleatório'),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: _playlist?.musics.length ?? 0,
-                        itemBuilder: (context, index) {
-                          final music = _playlist!.musics[index];
-                          return ListTile(
-                            title: Text(music.title),
-                            subtitle: Text(music.artist),
-                          );
-                        },
+    return _isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : _playlist == null
+            ? const Center(child: Text('Playlist não encontrada'))
+            : Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => _playPlaylist(false),
+                        child: const Text('Tocar em Ordem'),
                       ),
+                      ElevatedButton(
+                        onPressed: () => _playPlaylist(true),
+                        child: const Text('Tocar Aleatório'),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _playlist!.musics.length,
+                      itemBuilder: (context, index) {
+                        final music = _playlist!.musics[index];
+                        return ListTile(
+                          title: Text(music.title),
+                          subtitle: Text(music.artist),
+                        );
+                      },
                     ),
-                  ],
-                ),
-    );
+                  ),
+                ],
+              );
   }
-} 
+}
