@@ -42,6 +42,10 @@ class AuthService {
         return authResponse;
       }
 
+      if (response.statusCode == 401) {
+        await logout(); // Logout se não autorizado
+      }
+
       throw Exception('Falha no login: ${response.statusCode}');
     } catch (e) {
       print('Erro no login: $e');

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:musga/screens/tabs/playlist_tab.dart';
 import '../services/api/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'tabs/search_music_tab.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/player/music_player_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -103,7 +103,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: TabBarView(
               controller: _tabController,
               children: [
-                const PlaylistsTab(),
+                Builder(
+                  builder: (context) {
+                    print('DEBUG: Construindo PlaylistsTab no TabBarView');
+                    return const PlaylistsTab();
+                  },
+                ),
                 Builder(
                   builder: (context) {
                     print('DEBUG: Construindo SearchMusicTab no TabBarView');
@@ -131,15 +136,3 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.dispose();
   }
 }
-
-class PlaylistsTab extends StatelessWidget {
-  const PlaylistsTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Lista de Playlists virá aqui'),
-      // TODO: Implementar lista de playlists
-    );
-  }
-} 
