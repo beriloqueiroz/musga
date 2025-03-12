@@ -237,6 +237,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   factory SearchResponse({
     $core.Iterable<Music>? musicList,
     $core.int? total,
+    $core.Iterable<MusicMetadata>? metadataList,
   }) {
     final $result = create();
     if (musicList != null) {
@@ -244,6 +245,9 @@ class SearchResponse extends $pb.GeneratedMessage {
     }
     if (total != null) {
       $result.total = total;
+    }
+    if (metadataList != null) {
+      $result.metadataList.addAll(metadataList);
     }
     return $result;
   }
@@ -254,6 +258,7 @@ class SearchResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'music'), createEmptyInstance: create)
     ..pc<Music>(1, _omitFieldNames ? '' : 'musicList', $pb.PbFieldType.PM, subBuilder: Music.create)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'total', $pb.PbFieldType.O3)
+    ..pc<MusicMetadata>(3, _omitFieldNames ? '' : 'metadataList', $pb.PbFieldType.PM, subBuilder: MusicMetadata.create)
     ..hasRequiredFields = false
   ;
 
@@ -289,6 +294,9 @@ class SearchResponse extends $pb.GeneratedMessage {
   $core.bool hasTotal() => $_has(1);
   @$pb.TagNumber(2)
   void clearTotal() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.List<MusicMetadata> get metadataList => $_getList(2);
 }
 
 class Music extends $pb.GeneratedMessage {
@@ -484,6 +492,15 @@ class MusicMetadata extends $pb.GeneratedMessage {
     $core.String? artist,
     $core.String? album,
     $core.String? type,
+    $core.int? year,
+    $core.String? genre,
+    $core.String? composer,
+    $core.String? label,
+    $core.List<$core.int>? albumArt,
+    $core.String? albumArtType,
+    $core.String? comments,
+    $core.String? isrc,
+    $core.String? url,
   }) {
     final $result = create();
     if (title != null) {
@@ -498,6 +515,33 @@ class MusicMetadata extends $pb.GeneratedMessage {
     if (type != null) {
       $result.type = type;
     }
+    if (year != null) {
+      $result.year = year;
+    }
+    if (genre != null) {
+      $result.genre = genre;
+    }
+    if (composer != null) {
+      $result.composer = composer;
+    }
+    if (label != null) {
+      $result.label = label;
+    }
+    if (albumArt != null) {
+      $result.albumArt = albumArt;
+    }
+    if (albumArtType != null) {
+      $result.albumArtType = albumArtType;
+    }
+    if (comments != null) {
+      $result.comments = comments;
+    }
+    if (isrc != null) {
+      $result.isrc = isrc;
+    }
+    if (url != null) {
+      $result.url = url;
+    }
     return $result;
   }
   MusicMetadata._() : super();
@@ -509,6 +553,15 @@ class MusicMetadata extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'artist')
     ..aOS(3, _omitFieldNames ? '' : 'album')
     ..aOS(4, _omitFieldNames ? '' : 'type')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'year', $pb.PbFieldType.O3)
+    ..aOS(6, _omitFieldNames ? '' : 'genre')
+    ..aOS(7, _omitFieldNames ? '' : 'composer')
+    ..aOS(8, _omitFieldNames ? '' : 'label')
+    ..a<$core.List<$core.int>>(9, _omitFieldNames ? '' : 'albumArt', $pb.PbFieldType.OY)
+    ..aOS(10, _omitFieldNames ? '' : 'albumArtType')
+    ..aOS(11, _omitFieldNames ? '' : 'comments')
+    ..aOS(12, _omitFieldNames ? '' : 'isrc')
+    ..aOS(13, _omitFieldNames ? '' : 'url')
     ..hasRequiredFields = false
   ;
 
@@ -568,6 +621,87 @@ class MusicMetadata extends $pb.GeneratedMessage {
   $core.bool hasType() => $_has(3);
   @$pb.TagNumber(4)
   void clearType() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get year => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set year($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasYear() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearYear() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get genre => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set genre($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasGenre() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearGenre() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get composer => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set composer($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasComposer() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearComposer() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get label => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set label($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasLabel() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearLabel() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.List<$core.int> get albumArt => $_getN(8);
+  @$pb.TagNumber(9)
+  set albumArt($core.List<$core.int> v) { $_setBytes(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasAlbumArt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearAlbumArt() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get albumArtType => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set albumArtType($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasAlbumArtType() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAlbumArtType() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get comments => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set comments($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasComments() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearComments() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get isrc => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set isrc($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasIsrc() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearIsrc() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get url => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set url($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasUrl() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearUrl() => clearField(13);
 }
 
 class UploadResponse extends $pb.GeneratedMessage {

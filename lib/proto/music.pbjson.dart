@@ -63,13 +63,15 @@ const SearchResponse$json = {
   '2': [
     {'1': 'music_list', '3': 1, '4': 3, '5': 11, '6': '.music.Music', '10': 'musicList'},
     {'1': 'total', '3': 2, '4': 1, '5': 5, '10': 'total'},
+    {'1': 'metadata_list', '3': 3, '4': 3, '5': 11, '6': '.music.MusicMetadata', '10': 'metadataList'},
   ],
 };
 
 /// Descriptor for `SearchResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List searchResponseDescriptor = $convert.base64Decode(
     'Cg5TZWFyY2hSZXNwb25zZRIrCgptdXNpY19saXN0GAEgAygLMgwubXVzaWMuTXVzaWNSCW11c2'
-    'ljTGlzdBIUCgV0b3RhbBgCIAEoBVIFdG90YWw=');
+    'ljTGlzdBIUCgV0b3RhbBgCIAEoBVIFdG90YWwSOQoNbWV0YWRhdGFfbGlzdBgDIAMoCzIULm11'
+    'c2ljLk11c2ljTWV0YWRhdGFSDG1ldGFkYXRhTGlzdA==');
 
 @$core.Deprecated('Use musicDescriptor instead')
 const Music$json = {
@@ -114,13 +116,26 @@ const MusicMetadata$json = {
     {'1': 'artist', '3': 2, '4': 1, '5': 9, '10': 'artist'},
     {'1': 'album', '3': 3, '4': 1, '5': 9, '10': 'album'},
     {'1': 'type', '3': 4, '4': 1, '5': 9, '10': 'type'},
+    {'1': 'year', '3': 5, '4': 1, '5': 5, '10': 'year'},
+    {'1': 'genre', '3': 6, '4': 1, '5': 9, '10': 'genre'},
+    {'1': 'composer', '3': 7, '4': 1, '5': 9, '10': 'composer'},
+    {'1': 'label', '3': 8, '4': 1, '5': 9, '10': 'label'},
+    {'1': 'album_art', '3': 9, '4': 1, '5': 12, '10': 'albumArt'},
+    {'1': 'album_art_type', '3': 10, '4': 1, '5': 9, '10': 'albumArtType'},
+    {'1': 'comments', '3': 11, '4': 1, '5': 9, '10': 'comments'},
+    {'1': 'isrc', '3': 12, '4': 1, '5': 9, '10': 'isrc'},
+    {'1': 'url', '3': 13, '4': 1, '5': 9, '10': 'url'},
   ],
 };
 
 /// Descriptor for `MusicMetadata`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List musicMetadataDescriptor = $convert.base64Decode(
     'Cg1NdXNpY01ldGFkYXRhEhQKBXRpdGxlGAEgASgJUgV0aXRsZRIWCgZhcnRpc3QYAiABKAlSBm'
-    'FydGlzdBIUCgVhbGJ1bRgDIAEoCVIFYWxidW0SEgoEdHlwZRgEIAEoCVIEdHlwZQ==');
+    'FydGlzdBIUCgVhbGJ1bRgDIAEoCVIFYWxidW0SEgoEdHlwZRgEIAEoCVIEdHlwZRISCgR5ZWFy'
+    'GAUgASgFUgR5ZWFyEhQKBWdlbnJlGAYgASgJUgVnZW5yZRIaCghjb21wb3NlchgHIAEoCVIIY2'
+    '9tcG9zZXISFAoFbGFiZWwYCCABKAlSBWxhYmVsEhsKCWFsYnVtX2FydBgJIAEoDFIIYWxidW1B'
+    'cnQSJAoOYWxidW1fYXJ0X3R5cGUYCiABKAlSDGFsYnVtQXJ0VHlwZRIaCghjb21tZW50cxgLIA'
+    'EoCVIIY29tbWVudHMSEgoEaXNyYxgMIAEoCVIEaXNyYxIQCgN1cmwYDSABKAlSA3VybA==');
 
 @$core.Deprecated('Use uploadResponseDescriptor instead')
 const UploadResponse$json = {
