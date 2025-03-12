@@ -67,7 +67,21 @@ class AudioPlayerService {
       await _player.play();
     } catch (e, stack) {
       log.e('Erro ao reproduzir música', error: e, stackTrace: stack);
-      rethrow;
+      // Aqui você pode decidir se quer rethrow ou apenas logar o erro
+    }
+  }
+
+  Future<void> playMusicList(List<String> musicIds, bool randomOrder) async {
+    if (randomOrder) {
+      musicIds.shuffle(); // Embaralha a lista se a ordem for aleatória
+    }
+    for (var musicId in musicIds) {
+      try {
+        await playMusic(musicId); // Toca cada música na lista
+      } catch (e) {
+        log.e('Erro ao tocar a música $musicId, ignorando e passando para a próxima.', error: e);
+        // Ignora o erro e continua com a próxima música
+      }
     }
   }
 

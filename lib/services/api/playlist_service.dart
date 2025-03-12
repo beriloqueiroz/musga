@@ -26,8 +26,8 @@ class PlaylistService {
     }
   }
 
-  Future<Playlist> getPlaylist(int id) async {
-    final response = await http.get(Uri.parse('$baseUrl/playlists/$id'), headers: {
+  Future<Playlist> getPlaylist(String id) async {
+    final response = await http.get(Uri.parse('$baseUrl/playlists/$id/musics'), headers: {
       'Authorization': 'Bearer ${_prefs.getString('token')}',
     });
     if (response.statusCode == 200) {

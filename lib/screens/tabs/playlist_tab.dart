@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musga/screens/tabs/playlist_detail_screen.dart';
 
 import 'package:musga/services/api/playlist_service.dart';
 import 'package:musga/models/playlist.dart';
@@ -129,8 +130,12 @@ class _PlaylistsTabState extends ConsumerState<PlaylistsTab> {
                             },
                           ),
                           onTap: () {
-                            // Navegar para a tela de detalhes da playlist
-                            Navigator.pushNamed(context, '/playlist/${playlist.id}');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PlaylistDetailScreen(playlistId: playlist.id),
+                              ),
+                            );
                           },
                         );
                       },
