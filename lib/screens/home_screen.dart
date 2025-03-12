@@ -22,9 +22,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.initState();
     print('DEBUG: HomeScreen initState');
     _tabController = TabController(length: 2, vsync: this);
+    
+    // Adiciona o listener apenas uma vez
     _tabController.addListener(() {
       print('DEBUG: Tab alterada para índice ${_tabController.index}');
     });
+    
     _loadUserData();
   }
 
@@ -103,18 +106,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: TabBarView(
               controller: _tabController,
               children: [
-                Builder(
-                  builder: (context) {
-                    print('DEBUG: Construindo PlaylistsTab no TabBarView');
-                    return const PlaylistsTab();
-                  },
-                ),
-                Builder(
-                  builder: (context) {
-                    print('DEBUG: Construindo SearchMusicTab no TabBarView');
-                    return const SearchMusicTab();
-                  },
-                ),
+                const PlaylistsTab(),
+                const SearchMusicTab(),
               ],
             ),
           ),

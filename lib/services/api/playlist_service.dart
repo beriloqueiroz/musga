@@ -16,8 +16,11 @@ class PlaylistService {
     final response = await http.get(Uri.parse('$baseUrl/playlists'), headers: {
       'Authorization': 'Bearer ${_prefs.getString('token')}',
     });
+
     if (response.statusCode == 200) {
-      return (json.decode(response.body) as List).map((e) => Playlist.fromJson(e)).toList();
+      // Certifique-se de que a resposta é uma lista de playlists
+      final List<dynamic> jsonResponse = json.decode(response.body);
+      return jsonResponse.map((e) => Playlist.fromJson(e)).toList();
     } else if (response.statusCode == 401) {
       await _authService.logout(); // Logout se não autorizado
       throw Exception('Failed to load playlists');
@@ -55,11 +58,11 @@ class PlaylistService {
     }
   }
 
-  Future<void> addMusicToPlaylist(int playlistId, String musicId) async {
+  Future<void> addMusicToPlaylist(String playlistId, String musicId) async {
     final response = await http.post(Uri.parse('$baseUrl/playlists/$playlistId/musics'), headers: {
       'Authorization': 'Bearer ${_prefs.getString('token')}',
     }, body: json.encode({'music_id': musicId}));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return;
     } else if (response.statusCode == 401) {
       await _authService.logout(); // Logout se não autorizado

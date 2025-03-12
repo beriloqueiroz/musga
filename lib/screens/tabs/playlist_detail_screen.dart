@@ -85,16 +85,12 @@ class _PlaylistDetailScreenState extends ConsumerState<PlaylistDetailScreen> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: _playlist!.musics.length,
+                        itemCount: _playlist?.musics.length ?? 0,
                         itemBuilder: (context, index) {
                           final music = _playlist!.musics[index];
                           return ListTile(
                             title: Text(music.title),
                             subtitle: Text(music.artist),
-                            onTap: () {
-                              // Tocar música individualmente se necessário
-                              // player.playMusic(music.id);
-                            },
                           );
                         },
                       ),

@@ -5,6 +5,9 @@ import 'dart:async';
 import '../../utils/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/player_provider.dart';
+import '../../services/api/playlist_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:musga/models/playlist.dart';
 
 class SearchMusicTab extends ConsumerStatefulWidget {
   const SearchMusicTab({super.key});
@@ -22,12 +25,30 @@ class _SearchMusicTabState extends ConsumerState<SearchMusicTab> {
   final _scrollController = ScrollController();
   final musicService = MusicServiceFactory.create();
   Timer? _debounce;
+  List<Playlist> _playlists = [];
 
   @override
   void initState() {
-    print('DEBUG: SearchMusicTab - initState chamado');
+    log.d('init state 1');
     super.initState();
+    log.d('init state 2');
+    print('DEBUG: SearchMusicTab - initState chamado');
     _scrollController.addListener(_onScroll);
+    _loadPlaylists(); // Carregar playlists ao iniciar
+  }
+
+  Future<void> _loadPlaylists() async {
+    final prefs = await SharedPreferences.getInstance();
+    final playlistService = PlaylistService(prefs);
+    try {
+      final playlists = await playlistService.getPlaylists();
+      setState(() {
+        _playlists = playlists;
+      });
+      log.d('Playlists carregadas: ${_playlists.length}'); // Adicione este log
+    } catch (e) {
+      log.e('Erro ao carregar playlists: $e');
+    }
   }
 
   void _onScroll() {
@@ -118,6 +139,49 @@ class _SearchMusicTabState extends ConsumerState<SearchMusicTab> {
     player.playMusic(musicId);
   }
 
+  void _addMusicToPlaylist(String musicId) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Adicionar à Playlist'),
+          content: DropdownButton<Playlist>(
+            hint: const Text('Escolha uma Playlist'),
+            items: _playlists.map((playlist) {
+              return DropdownMenuItem<Playlist>(
+                value: playlist,
+                child: Text(playlist.name),
+              );
+            }).toList(),
+            onChanged: (selectedPlaylist) {
+              if (selectedPlaylist != null) {
+                // Chame o método para adicionar a música à playlist
+                _addMusicToSelectedPlaylist(selectedPlaylist.id, musicId);
+                Navigator.of(context).pop(); // Fecha o diálogo
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _addMusicToSelectedPlaylist(String playlistId, String musicId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final playlistService = PlaylistService(prefs);
+    try {
+      await playlistService.addMusicToPlaylist(playlistId, musicId);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Música adicionada à playlist!')),
+      );
+    } catch (e) {
+      log.e('Erro ao adicionar música à playlist: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao adicionar música à playlist: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     print('DEBUG: SearchMusicTab - build chamado');
@@ -176,9 +240,18 @@ class _SearchMusicTabState extends ConsumerState<SearchMusicTab> {
                           leading: const Icon(Icons.music_note),
                           title: Text(music.title),
                           subtitle: Text('${music.artist} • ${music.album}'),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.play_arrow),
-                            onPressed: () => _playMusic(music.id),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.play_arrow),
+                                onPressed: () => _playMusic(music.id),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () => _addMusicToPlaylist(music.id),
+                              ),
+                            ],
                           ),
                         );
                       },
