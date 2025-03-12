@@ -58,6 +58,11 @@ class _PlaylistDetailScreenState extends ConsumerState<PlaylistDetailScreen> {
     }
   }
 
+  void _playMusic(String musicId) {
+    final player = ref.read(playerProvider);
+    player.playMusic(musicId); // Chama o método para tocar a música
+  }
+
   @override
   Widget build(BuildContext context) {
     return _isLoading
@@ -87,6 +92,10 @@ class _PlaylistDetailScreenState extends ConsumerState<PlaylistDetailScreen> {
                         return ListTile(
                           title: Text(music.title),
                           subtitle: Text(music.artist),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.play_arrow),
+                            onPressed: () => _playMusic(music.id), // Toca a música ao clicar
+                          ),
                         );
                       },
                     ),
