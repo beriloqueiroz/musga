@@ -1,4 +1,5 @@
 import 'package:grpc/grpc.dart';
+import 'package:musga/config/api_config.dart';
 import '../../proto/music.pbgrpc.dart';
 import '../../utils/logger.dart';
 import 'base_music_service.dart';
@@ -10,8 +11,8 @@ class NativeMusicService implements BaseMusicService {
     log.i('Iniciando serviço gRPC nativo...');
     try {
       final channel = ClientChannel(
-        '192.168.5.150',  // Seu IP local
-        port: 50051,
+        ApiConfig.serverIP,  // Seu IP local
+        port: ApiConfig.grpcPort,
         options: const ChannelOptions(
           credentials: ChannelCredentials.insecure(),
         ),
